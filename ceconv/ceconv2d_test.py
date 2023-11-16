@@ -4,7 +4,7 @@ import numpy as np
 import torch
 import unittest
 
-from ceconv.ceconv2d import CEConv2D
+from ceconv.ceconv2d import CEConv2d
 from ceconv.ceconv2d import _get_hue_rotation_matrix
 from ceconv.ceconv2d import _trans_input_filter
 from experiments.classification.datasets import normalize
@@ -115,10 +115,10 @@ class CEConv2DTest(unittest.TestCase):
     def _test_output_size(self, rotations, separable) -> None:
         """Check output sizes for lifting and hidden layers."""
 
-        conv1 = CEConv2D(
+        conv1 = CEConv2d(
             1, rotations, 3, 16, 3, bias=True, padding=1, separable=separable
         )
-        conv2 = CEConv2D(
+        conv2 = CEConv2d(
             rotations, rotations, 16, 32, 3, bias=True, padding=1, separable=separable
         )
 
@@ -133,8 +133,8 @@ class CEConv2DTest(unittest.TestCase):
 
         # Define color equivariant network.
         net = torch.nn.Sequential(
-            CEConv2D(1, rotations, 3, 16, 3, bias=True, separable=separable),
-            CEConv2D(rotations, rotations, 16, 32, 3, bias=True, separable=separable),
+            CEConv2d(1, rotations, 3, 16, 3, bias=True, separable=separable),
+            CEConv2d(rotations, rotations, 16, 32, 3, bias=True, separable=separable),
         )
 
         # Generate random input and hue-rotate it.
@@ -159,8 +159,8 @@ class CEConv2DTest(unittest.TestCase):
 
         # Define color equivariant network.
         net = torch.nn.Sequential(
-            CEConv2D(1, rotations, 3, 16, 3, bias=True, separable=separable),
-            CEConv2D(rotations, rotations, 16, 32, 3, bias=True, separable=separable),
+            CEConv2d(1, rotations, 3, 16, 3, bias=True, separable=separable),
+            CEConv2d(rotations, rotations, 16, 32, 3, bias=True, separable=separable),
         )
 
         # Generate random input and hue-rotate it.

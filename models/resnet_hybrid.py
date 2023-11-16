@@ -10,7 +10,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.hub import load_state_dict_from_url
 
-from ceconv.ceconv2d import CEConv2D
+from ceconv.ceconv2d import CEConv2d
 from ceconv.pooling import GroupCosetMaxPool, GroupMaxPool2d
 
 tv_pth = "https://download.pytorch.org/models/"
@@ -91,7 +91,7 @@ class BasicBlock(nn.Module):
                     bnlayer(self.expansion * planes),
                 )
         else:
-            self.conv1 = CEConv2D(
+            self.conv1 = CEConv2d(
                 rotations,
                 rotations,
                 in_planes,
@@ -102,7 +102,7 @@ class BasicBlock(nn.Module):
                 bias=False,
                 separable=separable,
             )
-            self.conv2 = CEConv2D(
+            self.conv2 = CEConv2d(
                 rotations,
                 rotations,
                 planes,
@@ -115,7 +115,7 @@ class BasicBlock(nn.Module):
             )
             if stride != 1 or in_planes != self.expansion * planes:
                 self.shortcut = nn.Sequential(
-                    CEConv2D(
+                    CEConv2d(
                         rotations,
                         rotations,
                         in_planes,
@@ -169,7 +169,7 @@ class Bottleneck(nn.Module):
                     bnlayer(self.expansion * planes),
                 )
         else:
-            self.conv1 = CEConv2D(
+            self.conv1 = CEConv2d(
                 rotations,
                 rotations,
                 in_planes,
@@ -178,7 +178,7 @@ class Bottleneck(nn.Module):
                 bias=False,
                 separable=separable,
             )
-            self.conv2 = CEConv2D(
+            self.conv2 = CEConv2d(
                 rotations,
                 rotations,
                 planes,
@@ -189,7 +189,7 @@ class Bottleneck(nn.Module):
                 bias=False,
                 separable=separable,
             )
-            self.conv3 = CEConv2D(
+            self.conv3 = CEConv2d(
                 rotations,
                 rotations,
                 planes,
@@ -201,7 +201,7 @@ class Bottleneck(nn.Module):
 
             if stride != 1 or in_planes != self.expansion * planes:
                 self.shortcut = nn.Sequential(
-                    CEConv2D(
+                    CEConv2d(
                         rotations,
                         rotations,
                         in_planes,
@@ -294,7 +294,7 @@ class HybridResNet(nn.Module):
 
         # Use CEConv2D for rotations > 1.
         if rotations > 1:
-            self.conv1 = CEConv2D(
+            self.conv1 = CEConv2d(
                 1,  # in_rotations
                 rotations,
                 3,  # in_channels

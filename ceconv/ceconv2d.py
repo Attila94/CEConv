@@ -83,7 +83,31 @@ def _trans_hidden_filter(weights: torch.Tensor, rotations: int) -> torch.Tensor:
     return transformed_weights
 
 
-class CEConv2D(nn.Conv2d):
+class CEConv2d(nn.Conv2d):
+    """
+    Applies a Color Equivariant convolution over an input signal composed of several
+    input planes.
+
+
+    Args:
+        in_rotations (int): Number of input rotations: 1 for input layer, >1 for
+            hidden layers.
+        out_rotations (int): Number of output rotations.
+        in_channels (int): Number of input channels.
+        out_channels (int): Number of channels produced by the convolution.
+        kernel_size (int or tuple): Size of the convolving kernel.
+        learnable (bool): If True, the transformation matrix is learnable.
+        separable (bool): If True, the convolution is separable.
+        kernel_size (int or tuple): Size of the convolving kernel.
+        stride (int or tuple, optional): Stride of the convolution. Default: 1
+        padding (int, tuple or str, optional): Padding added to all four sides of
+            the input. Default: 0
+        padding_mode (str, optional): ``'zeros'``, ``'reflect'``,
+            ``'replicate'`` or ``'circular'``. Default: ``'zeros'``
+        bias (bool, optional): If ``True``, adds a learnable bias to the
+            output. Default: ``True``
+    """
+
     def __init__(
         self,
         in_rotations: int,
@@ -95,7 +119,6 @@ class CEConv2D(nn.Conv2d):
         separable: bool = True,
         **kwargs
     ) -> None:
-
         self.in_rotations = in_rotations
         self.out_rotations = out_rotations
         self.separable = separable

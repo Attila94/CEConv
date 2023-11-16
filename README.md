@@ -1,6 +1,6 @@
 # CEConv - Color Equivariant Convolutional Networks
 
-[[ArXiv][https://arxiv.org/abs/2310.19368]] - NeurIPS 2023, by Attila Lengyel, Ombretta Strafforello, Robert-Jan Bruintjes, Alexander Gielisse, and Jan van Gemert.
+[[ArXiv](https://arxiv.org/abs/2310.19368)] - NeurIPS 2023, by Attila Lengyel, Ombretta Strafforello, Robert-Jan Bruintjes, Alexander Gielisse, and Jan van Gemert.
 
 This is the official code repository for Color Equivariant Convolutional Networks. This readme will be updated upon publication of the paper.
 
@@ -14,10 +14,9 @@ Create a local clone of this repository:
 git clone https://github.com/Attila94/CEConv
 ```
 
-Set up the python environment:
+See `requirements.txt` for the required Python packages. You can install them using:
 ```bash
-conda env create -f environment.yml
-conda activate ceconv
+pip install -r requirements.txt
 ```
 
 Install CEConv:
@@ -111,7 +110,7 @@ python -m experiments.color_mnist.train_biased --std $2 --rotations 3 --planes 1
 ```
 
 ### Classification
-Only the commands for CIFAR10 are provided. The commands for other datasets are similar, but optionally the `--architecture 'resnet18'` flag can be added to use a ResNet18 architecture instead of a ResNet44.
+Only the commands for CIFAR10 are provided. The commands for other datasets are similar, where the dataset can be specified using the `--dataset 'cifar100'`. Optionally the `--architecture 'resnet18'` flag can be added to use a ResNet18 architecture instead of a ResNet44.
 
 ```bash
 # Baseline, grayscale and color jitter.

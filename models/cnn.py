@@ -4,7 +4,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from ceconv.ceconv2d import CEConv2D
+from ceconv.ceconv2d import CEConv2d
 from ceconv.pooling import GroupCosetMaxPool, GroupMaxPool2d
 
 
@@ -19,7 +19,6 @@ class CNN(nn.Module):
         planes: int,
         num_classes: int = 10,
     ) -> None:
-
         super().__init__()
 
         self.conv1 = nn.Conv2d(3, planes, kernel_size=3)
@@ -69,7 +68,6 @@ class CECNN(nn.Module):
         num_classes: int = 10,
         separable: bool = True,
     ) -> None:
-
         super().__init__()
 
         assert rotations >= 2, "Rotations must be >= 2."
@@ -84,7 +82,7 @@ class CECNN(nn.Module):
         self.ceconv_list = nn.ModuleList(
             [
                 nn.Sequential(
-                    CEConv2D(
+                    CEConv2d(
                         1 if i == 0 else rotations,
                         rotations,
                         3 if i == 0 else planes,

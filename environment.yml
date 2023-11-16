@@ -1,0 +1,14 @@
+name: color-equivariance
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+dependencies:
+  - pip
+  - matplotlib
+  - numpy
+  - scipy
+  - pytorch
+  - torchvision
+  - wandb
+  - torchinfo
